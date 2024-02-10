@@ -3,11 +3,14 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sellers_app/global/global_instances.dart';
 import 'package:firebase_storage/firebase_storage.dart' as fStorage;
 import 'package:sellers_app/global/global_vars.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../view/mainScreens/home_screen.dart';
 
 class AuthViewModel
 {
@@ -26,11 +29,17 @@ class AuthViewModel
               //Borra locationAddress V12
               if(name.isNotEmpty && email.isNotEmpty && password.isNotEmpty && confirmPassword.isNotEmpty && phone.isNotEmpty && locationAddress.isNotEmpty)
                 {
+                  commonViewModel.showSnackBar("Cargando...", context);
+
                   User? currentFirebaseUser =  await createUserInFirebaseAuth(email, password, context);
 
                   String downloadUrl = await uploadImageToStorage(imageXFile);
 
                   await saveUserDataToFirestore(currentFirebaseUser, downloadUrl, name, email, password, locationAddress, phone);
+                  
+                  Navigator.push(context, MaterialPageRoute(builder: (c)=> HomeScreen()));
+                  
+                  commonViewModel.showSnackBar("Cuenta Creada Correctamente", context);
                 }
               else
                 {
