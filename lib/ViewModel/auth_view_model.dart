@@ -73,6 +73,7 @@ class AuthViewModel
 
     if(currentFirebaseUser == null)
       {
+        FirebaseAuth.instance.signOut();
         return;
       }
     return currentFirebaseUser;
@@ -112,11 +113,86 @@ class AuthViewModel
           "longitude": position!.longitude,
         });
 
-        sharedPreferences = await SharedPreferences.getInstance();
+
         await sharedPreferences!.setString("uid", currentFirebaseUser.uid);
         await sharedPreferences!.setString("email", email);
         await sharedPreferences!.setString("name", name);
         await sharedPreferences!.setString("imageUrl", downloadUrl);
 
+  }
+
+  validateSignInForm(String email, String password, BuildContext context) async
+  {
+    if(email.isNotEmpty && password.isNotEmpty)
+      {
+        commonViewModel.showSnackBar("Verificando Informacion", context);
+
+        User? currentFirebaseUser = await loginUser (email, password, context);
+
+        await readDataFromFirestoreAndSetDataLocally(currentFirebaseUser, context);
+
+        Navigator.push(context, MaterialPageRoute(builder: (c)=> HomeScreen()));
+      }
+    else
+      {
+        commonViewModel.showSnackBar("Ingrese Correo y Clave", context);
+        return;
+      }
+  }
+
+  loginUser(email, password, context) async
+  {
+    User? currentFirebaseUser;
+
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email,
+        password: password
+    ).then((valueAuth)
+    {
+     currentFirebaseUser = valueAuth.user;
+    }).catchError((errorMsg)
+    {
+      commonViewModel.showSnackBar(errorMsg, context);
+    });
+
+    if(currentFirebaseUser == null)
+      {
+        FirebaseAuth.instance.signOut();
+        return;
+      }
+    return currentFirebaseUser;
+  }
+
+  readDataFromFirestoreAndSetDataLocally(User? currentFirebaseUser, BuildContext context) async
+  {
+    await FirebaseFirestore.instance
+        .collection("sellers")
+        .doc(currentFirebaseUser!.uid)
+        .get()
+        .then((dataSnapshot) async
+    {
+      if(dataSnapshot.exists)
+        {
+          if(dataSnapshot.data()!["status"] == "approved" )
+            {
+              await sharedPreferences!.setString("uid", currentFirebaseUser!.uid);
+              await sharedPreferences!.setString("email", dataSnapshot.data()!["email"]);
+              await sharedPreferences!.setString("name", dataSnapshot.data()!["name"]);
+              await sharedPreferences!.setString("imageUrl", dataSnapshot.data()!["image"]);
+            }
+          else
+            {
+              commonViewModel.showSnackBar("Cuenta bloqueada por Admin", context);
+              FirebaseAuth.instance.signOut();
+              return;
+            }
+        }
+      else
+        {
+          commonViewModel.showSnackBar("Este Correo no Existe", context);
+          FirebaseAuth.instance.signOut();
+          return;
+        }
+    });
   }
 }
