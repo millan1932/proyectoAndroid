@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "468544879469",
+    "firebase_url": "https://ecommerce-react-554b3.firebaseio.com",
+    "project_id": "ecommerce-react-554b3",
+    "storage_bucket": "ecommerce-react-554b3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:468544879469:android:43f606804df2ab2a817864",
+        "android_client_info": {
+          "package_name": "com.millanstudios.sellers_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "468544879469-n30df43q9s43r6ludd851iorneka998p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA57TayTKcEbcxQx8twU7S-anlbTJhyPdg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "468544879469-n30df43q9s43r6ludd851iorneka998p.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "468544879469-6l3ukientnla6nn90k22hsibsgcce1on.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.firebaseDisplay"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
