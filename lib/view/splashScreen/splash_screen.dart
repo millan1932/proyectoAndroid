@@ -21,17 +21,14 @@ class _MySplashScreenState extends State<MySplashScreen>
   {
     Timer(const Duration(seconds: 3), () async
     {
-      if(FirebaseAuth.instance.currentUser != null)
-        {
-          Navigator.push(context, MaterialPageRoute(builder: (c)=>HomeScreen()));
-        }
-        else
-          {
-            //Esperamos 3 segundos y llamamos al home_screen que es HomeScreen
-            Navigator.push(context, MaterialPageRoute(builder: (c)=>AuthScreen()));
-          }
-
-
+      if(FirebaseAuth.instance.currentUser == null)
+      {
+        Navigator.push(context, MaterialPageRoute(builder: (c) => AuthScreen()));
+      }
+      else
+      {
+        Navigator.push(context, MaterialPageRoute(builder: (c) => HomeScreen()));
+      }
     });
   }
 

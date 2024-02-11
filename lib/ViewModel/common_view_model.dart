@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
@@ -19,6 +21,22 @@ class CommonViewModel
 
     return fullAddress;
   }
+
+  updateLocationInDatabase() async
+  {
+    String address = await getCurrentLocation();
+
+     await FirebaseFirestore.instance
+         .collection("sellers")
+         .doc(FirebaseAuth.instance.currentUser!.uid)
+         .update(
+         {
+           "address": address,
+           "latitude": position!.latitude,
+           "longitude":position!.longitude,
+         });
+  }
+
   //video#12
     showSnackBar(String message, BuildContext context)
     {
