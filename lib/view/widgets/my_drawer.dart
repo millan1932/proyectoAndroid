@@ -5,6 +5,9 @@ import 'package:sellers_app/global/global_vars.dart';
 import 'package:sellers_app/view/mainScreens/home_screen.dart';
 import 'package:sellers_app/view/splashScreen/splash_screen.dart';
 
+import '../pedidos/agregar_pedidos.dart';
+import '../pedidos/ver_pedidos.dart';
+
 class MyDrawer extends StatelessWidget {
   const MyDrawer({Key? key}) : super(key: key);
 
@@ -64,9 +67,9 @@ class MyDrawer extends StatelessWidget {
                   thickness: 2,
                 ),
                 ListTile(
-                  leading: Icon(Icons.home, color: Colors.white,),
+                  leading: const Icon(Icons.home, color: Colors.white,),
                   title: const Text(
-                    "homeV17",
+                    "Inicio",
                      style: TextStyle(color: Colors.white),
                   ),
                   onTap: ()
@@ -84,12 +87,12 @@ class MyDrawer extends StatelessWidget {
                 ListTile(
                     leading: const Icon(Icons.home, color: Colors.white,),
                     title: const Text(
-                      "homeV17",
+                      "Agregar Pedido",
                       style: TextStyle(color: Colors.white),
                     ),
                     onTap: ()
                     {
-                      Navigator.push(context, MaterialPageRoute(builder: (c)=> HomeScreen()));
+                      Navigator.push(context, MaterialPageRoute(builder: (c) => AgregarPedidoScreen()));
                     }
                 ),
 
@@ -107,63 +110,12 @@ class MyDrawer extends StatelessWidget {
                     ),
                     onTap: ()
                     {
-                      Navigator.push(context, MaterialPageRoute(builder: (c)=> HomeScreen()));
+                      Navigator.push(context, MaterialPageRoute(builder: (c)=> VerPedidosScreen()));
                     }
                 ),
 
                 //3
-                const Divider(
-                  height: 10,
-                  color: Colors.grey,
-                  thickness: 2,
-                ),
-                ListTile(
-                    leading: const Icon(Icons.reorder, color: Colors.white,),
-                    title: const Text(
-                      "Nueva Orden",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    onTap: ()
-                    {
-                      Navigator.push(context, MaterialPageRoute(builder: (c)=> HomeScreen()));
-                    }
-                ),
 
-                //4
-                const Divider(
-                  height: 10,
-                  color: Colors.grey,
-                  thickness: 2,
-                ),
-                ListTile(
-                    leading: const Icon(Icons.local_shipping, color: Colors.white,),
-                    title: const Text(
-                      "Historial",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    onTap: ()
-                    {
-                      Navigator.push(context, MaterialPageRoute(builder: (c)=> HomeScreen()));
-                    }
-                ),
-
-                const Divider(
-                  height: 10,
-                  color: Colors.grey,
-                  thickness: 2,
-                ),
-                ListTile(
-                    leading: const Icon(Icons.share_location, color: Colors.white,),
-                    title: const Text(
-                      "Actualizar mi Direccion",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    onTap: ()
-                    {
-                      commonViewModel.updateLocationInDatabase();
-                      commonViewModel.showSnackBar("Tu direccion esta Actualizada", context);
-                    }
-                ),
 
 
                 const Divider(

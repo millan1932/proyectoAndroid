@@ -68,7 +68,7 @@ class _SigninScreenState extends State<SigninScreen>
                       );
                     } ,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blueAccent,
+                    backgroundColor: Colors.grey,
                     padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 10)
                   ),
                   child: const Text(

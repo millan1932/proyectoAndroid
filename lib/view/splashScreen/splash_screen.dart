@@ -53,19 +53,19 @@ class _MySplashScreenState extends State<MySplashScreen>
               padding: const EdgeInsets.all(10.0),
               child: Image.asset(
                 //Ubicacion de la Imagen de Fondo del Splashscreen
-                "images/sellers.webp"
+                "images/sellers.png"
 
               ),
             ),
            //Titulo del SplashScreen
             const Text(
-              "App del Vendedor",
+              "Control de Pedidos",
               textAlign: TextAlign.center,
               style: TextStyle(
                 letterSpacing: 3,
                 fontSize: 26,
                 //Color del SplashScreen
-                color: Colors.green,
+                color: Colors.white,
               ),
             ),
           ],
